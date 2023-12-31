@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:JohansSimpleCalculator" xmlns:System="clr-namespace:System;assembly=netstandard"
+        xmlns:local="clr-namespace:JohansSimpleCalculator" xmlns:System="clr-namespace:System;assembly=netstandard" xmlns:controls="clr-namespace:JohansSimpleCalculator.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="400" 
         WindowStyle="SingleBorderWindow"  >
@@ -132,8 +132,11 @@
             </Grid.RowDefinitions>
             <Border x:Name="ContentContainer" CornerRadius="8" Grid.RowSpan="3" Background="#FF1A1C21"/>
 
-            <Border x:Name="titlebar" Grid.Row="0" Background="Transparent" Height="40" BorderThickness="0,0,0,1" BorderBrush="#33000000" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True" MouseDown="titlebar_MouseDown">
-                <TextBlock Text="Simple Calculator" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+            <Border x:Name="titlebar" Grid.Row="0" Background="Transparent" Height="31" BorderThickness="0,0,0,1" BorderBrush="#33000000" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True" MouseDown="titlebar_MouseDown">
+                <DockPanel>
+                    <controls:WindowControls DockPanel.Dock="Right"/>
+                    <TextBlock Text="Simple Calculator" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                </DockPanel>
             </Border>
 
             <Grid Margin="10,1" Grid.Row="1">
