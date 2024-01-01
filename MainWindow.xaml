@@ -119,7 +119,7 @@
         <WindowChrome CaptionHeight="{Binding ActualHeight,ElementName=titlebar}" GlassFrameThickness="30" ResizeBorderThickness="10" />
     </WindowChrome.WindowChrome>
 
-    <Border x:Name="Border1" CornerRadius="8" Background="#FF1A1A21" BorderThickness="2" SnapsToDevicePixels="True" BorderBrush="#FF0084FF">
+    <Border x:Name="WindowBorder" CornerRadius="8" Background="#FF1A1A21" BorderThickness="2" SnapsToDevicePixels="True" BorderBrush="#FF0084FF">
 
         <Grid >
             <Grid.OpacityMask>
@@ -134,7 +134,7 @@
 
             <Border x:Name="titlebar" Grid.Row="0" Background="Transparent" Height="31" BorderThickness="0,0,0,1" BorderBrush="#33000000" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True" MouseDown="titlebar_MouseDown">
                 <DockPanel>
-                    <controls:WindowControls DockPanel.Dock="Right"/>
+                    <controls:WindowControls DockPanel.Dock="Right" CloseWindow="WindowControls_CloseWindow" MaximizeWindow="WindowControls_MaximizeWindow" UnMaximizeWindow="WindowControls_UnMaximizeWindow" MinimizeWindow="WindowControls_MinimizeWindow"/>
                     <TextBlock Text="Simple Calculator" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 </DockPanel>
             </Border>

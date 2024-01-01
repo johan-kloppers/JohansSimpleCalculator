@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JohansSimpleCalculator.Controls" xmlns:System="clr-namespace:System;assembly=netstandard"
              mc:Ignorable="d" 
-             Height="31" Width="135">
+             Height="31" Width="135" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -73,17 +73,17 @@
             <ColumnDefinition Width="44"/>
             <ColumnDefinition Width="47"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="2" Style="{DynamicResource WindowButtonStyle}">
+        <Button Name="CloseBtn" Grid.Column="2" Style="{DynamicResource WindowButtonStyle}" Click="CloseBtn_Click">
             <Path  Stroke="White" StrokeThickness="1" Width="47" Height="31" Margin="-2"  Data="M 19.50,12.50 C 19.50,12.50 28.53,21.53 28.53,21.53M 19.44,21.53 C 19.44,21.53 28.50,12.50 28.50,12.50"/>
         </Button>
-        <Button Grid.Column="1" Style="{DynamicResource WindowButtonStyle}">
-            <Path  Stroke="White" StrokeThickness="1" Width="44" Height="31" Margin="-2"  Data="M 17.58,10.58
+        <Button Name="MaximizeBtn" Grid.Column="1" Style="{DynamicResource WindowButtonStyle}" Click="MaximizeBtn_Click">
+            <Path Name="MaximizeSymbol"  Stroke="White" StrokeThickness="1" Width="44" Height="31" Margin="-2"  Data="M 17.58,10.58
            C 17.58,10.58 26.44,10.53 26.44,10.53
              26.44,10.53 26.49,19.44 26.49,19.44
              26.49,19.44 17.51,19.47 17.51,19.47
              17.51,19.47 17.58,10.58 17.58,10.58"/>
         </Button>
-        <Button Grid.Column="0" Style="{DynamicResource WindowButtonStyle}">
+        <Button Name="MinimizeBtn" Grid.Column="0" Style="{DynamicResource WindowButtonStyle}" Click="MinimizeBtn_Click">
             <Path  Stroke="White" StrokeThickness="1" Width="44" Height="31" Margin="-2" Data="M 14.99,16.49 C 14.99,16.49 24.99,16.49 24.99,16.49"/>
         </Button>
     </Grid>

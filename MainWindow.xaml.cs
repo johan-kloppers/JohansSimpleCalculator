@@ -26,5 +26,27 @@ namespace JohansSimpleCalculator
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+
+        private void WindowControls_CloseWindow(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void WindowControls_MaximizeWindow(object sender, EventArgs e)
+        {
+            this.WindowState = WindowState.Maximized;
+            WindowBorder.Margin = new Thickness(5);
+        }
+
+        private void WindowControls_UnMaximizeWindow(object sender, EventArgs e)
+        {
+            this.WindowState = WindowState.Normal;
+            WindowBorder.Margin = new Thickness(0);
+        }
+
+        private void WindowControls_MinimizeWindow(object sender, EventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
     }
 }
