@@ -166,17 +166,17 @@
                 <Button Grid.Row="0" Grid.Column="0" Content="C" Style="{DynamicResource ButtonOtherStyle}"/>
                 <Button Grid.Row="0" Grid.Column="1" Content="CE" Style="{DynamicResource ButtonOtherStyle}"/>
                 <Button Grid.Row="0" Grid.Column="2" Content="%" Style="{DynamicResource ButtonOtherStyle}"/>
-                <Button Grid.Row="0" Grid.Column="3" Content="÷" Style="{DynamicResource ButtonOtherStyle}"/>
+                <Button Grid.Row="0" Grid.Column="3" Content="÷" Style="{DynamicResource ButtonOtherStyle}" Tag="÷" Click="OpperationButtonClick"/>
 
                 <Button Grid.Row="1" Grid.Column="0" Content="7" Style="{DynamicResource ButtonNumberStyle}" Tag="7" Click="NumberButtonClick"/>
                 <Button Grid.Row="1" Grid.Column="1" Content="8" Style="{DynamicResource ButtonNumberStyle}" Tag="8" Click="NumberButtonClick"/>
                 <Button Grid.Row="1" Grid.Column="2" Content="9" Style="{DynamicResource ButtonNumberStyle}" Tag="9" Click="NumberButtonClick"/>
-                <Button Grid.Row="1" Grid.Column="3" Content="×" Style="{DynamicResource ButtonOtherStyle}"/>
+                <Button Grid.Row="1" Grid.Column="3" Content="×" Style="{DynamicResource ButtonOtherStyle}" Tag="×" Click="OpperationButtonClick"/>
 
                 <Button Grid.Row="2" Grid.Column="0" Content="4" Style="{DynamicResource ButtonNumberStyle}" Tag="4" Click="NumberButtonClick"/>
                 <Button Grid.Row="2" Grid.Column="1" Content="5" Style="{DynamicResource ButtonNumberStyle}" Tag="5" Click="NumberButtonClick"/>
                 <Button Grid.Row="2" Grid.Column="2" Content="6" Style="{DynamicResource ButtonNumberStyle}" Tag="6" Click="NumberButtonClick"/>
-                <Button Grid.Row="2" Grid.Column="3" Content="−" Style="{DynamicResource ButtonOtherStyle}"/>
+                <Button Grid.Row="2" Grid.Column="3" Content="−" Style="{DynamicResource ButtonOtherStyle}" Tag="−" Click="OpperationButtonClick"/>
 
                 <Button Grid.Row="3" Grid.Column="0" Content="1" Style="{DynamicResource ButtonNumberStyle}" Tag="1" Click="NumberButtonClick"/>
                 <Button Grid.Row="3" Grid.Column="1" Content="2" Style="{DynamicResource ButtonNumberStyle}" Tag="2" Click="NumberButtonClick"/>
@@ -186,7 +186,7 @@
                 <Button Grid.Row="4" Grid.Column="0" Content="+/-" Style="{DynamicResource ButtonOtherStyle}"/>
                 <Button Grid.Row="4" Grid.Column="1" Content="0" Style="{DynamicResource ButtonNumberStyle}" Tag="0" Click="NumberButtonClick"/>
                 <Button Grid.Row="4" Grid.Column="2" Content="." Style="{DynamicResource ButtonOtherStyle}"/>
-                <Button Grid.Row="4" Grid.Column="3" Content="=" Style="{DynamicResource ButtonOtherStyle}"/>
+                <Button Grid.Row="4" Grid.Column="3" Content="=" Style="{DynamicResource ButtonOtherStyle}" Tag="=" Click="OpperationButtonClick"/>
 
 
             </Grid>

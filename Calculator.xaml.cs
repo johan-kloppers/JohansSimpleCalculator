@@ -70,6 +70,12 @@ namespace JohansSimpleCalculator
                             case ManipulationOperationType.Add:
                                 CalculationText += "+";
                                 break;
+                            case ManipulationOperationType.Subtract:
+                                CalculationText += "-";
+                                break;
+                            case ManipulationOperationType.Multiply:
+                                CalculationText += "×";
+                                break;
                         }
 
                     }
@@ -142,14 +148,42 @@ namespace JohansSimpleCalculator
                     case "+":
                         type = ManipulationOperationType.Add;
                         break;
-                    case "-":
+                    case "−":
                         type = ManipulationOperationType.Subtract;
+                        break;
+                    case "×":
+                        type = ManipulationOperationType.Multiply;
+                        break;
+                    case "=":
+                        type = ManipulationOperationType.Equals;
                         break;
                 }
 
+
+                object? LastItem = OpperationList.LastOrDefault();
+
+                if (LastItem is not null)
+                {
+                    if (LastItem.GetType() == typeof(ManipulationOperationType))
+                    {
+                        if (type is not null)
+                        {
+                            OpperationList.RemoveAt(OpperationList.Count - 1);
+                        }
+                    }
+                }
+
+                
                 if (type is not null)
                 {
-                    OpperationList.Add(type);
+                    if (type != ManipulationOperationType.Equals)
+                    {
+                        OpperationList.Add(type);
+                    }
+                    else
+                    {
+                        ShouldCalculateResult();
+                    }
                 }
             }
 
@@ -172,11 +206,33 @@ namespace JohansSimpleCalculator
                                 case ManipulationOperationType.Add:
                                     Add((ValueItem)OpperationList[0], (ValueItem)OpperationList[2]);
                                     break;
+                                case ManipulationOperationType.Subtract:
+                                    Subtract((ValueItem)OpperationList[0], (ValueItem)OpperationList[2]);
+                                    break;
+                                case ManipulationOperationType.Multiply:
+                                    Multiply((ValueItem)OpperationList[0], (ValueItem)OpperationList[2]);
+                                    break;
                             }
                         }
                     }
                 }
             }
+        }
+
+        private void Multiply(ValueItem valueItem1, ValueItem valueItem2)
+        {
+            OpperationList.Clear();
+            ValueItem Result = new ValueItem();
+            Result.SetValue(valueItem1.GetValue() * valueItem2.GetValue());
+            OpperationList.Add(Result);
+        }
+
+        private void Subtract(ValueItem valueItem1, ValueItem valueItem2)
+        {
+            OpperationList.Clear();
+            ValueItem Result = new ValueItem();
+            Result.SetValue(valueItem1.GetValue() - valueItem2.GetValue());
+            OpperationList.Add(Result);
         }
 
         private void Add(ValueItem valueItem1, ValueItem valueItem2)
