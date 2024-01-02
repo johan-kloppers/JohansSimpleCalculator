@@ -181,7 +181,7 @@
                 <Button Grid.Row="3" Grid.Column="0" Content="1" Style="{DynamicResource ButtonNumberStyle}" Tag="1" Click="NumberButtonClick"/>
                 <Button Grid.Row="3" Grid.Column="1" Content="2" Style="{DynamicResource ButtonNumberStyle}" Tag="2" Click="NumberButtonClick"/>
                 <Button Grid.Row="3" Grid.Column="2" Content="3" Style="{DynamicResource ButtonNumberStyle}" Tag="3" Click="NumberButtonClick"/>
-                <Button Grid.Row="3" Grid.Column="3" Content="+" Style="{DynamicResource ButtonOtherStyle}"/>
+                <Button Grid.Row="3" Grid.Column="3" Content="+" Style="{DynamicResource ButtonOtherStyle}" Tag="+" Click="OpperationButtonClick"/>
 
                 <Button Grid.Row="4" Grid.Column="0" Content="+/-" Style="{DynamicResource ButtonOtherStyle}"/>
                 <Button Grid.Row="4" Grid.Column="1" Content="0" Style="{DynamicResource ButtonNumberStyle}" Tag="0" Click="NumberButtonClick"/>

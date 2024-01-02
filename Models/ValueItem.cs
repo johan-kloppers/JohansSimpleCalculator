@@ -8,39 +8,44 @@ namespace JohansSimpleCalculator.Models
 {
     internal class ValueItem
     {
-        decimal Value = 0;
+        decimal _Value = 0;
         public void AddDigit(char value)
         {
-            if (Value == 0)
+            if (_Value == 0)
             {
                 bool result = Int32.TryParse(value.ToString(), out int NumberValue);
 
                 if (result is not false)
                 {
-                    Value = NumberValue;
+                    _Value = NumberValue;
                 }
             }
             else
             { 
-                string StringNumber = Value.ToString() + value;
+                string StringNumber = _Value.ToString() + value;
 
                 bool result = Decimal.TryParse(StringNumber, out decimal NumberValue);
 
                 if (result is not false)
                 {
-                    Value = NumberValue;
+                    _Value = NumberValue;
                 }
             }
         }
 
+        public void SetValue(decimal value)
+        {
+            _Value = value;
+        }
+
         public string GetValueString()
         { 
-            return Value.ToString();
+            return _Value.ToString();
         }
 
         public decimal GetValue()
         {
-            return Value;
+            return _Value;
         }
         public void RemoveDigit()
         {

@@ -17,7 +17,7 @@ namespace JohansSimpleCalculator
     /// </summary>
     public partial class Calculator : Window
     {
-        List<object> OpperationList = new List<object>(); 
+        List<object> OpperationList = new List<object>();
 
         public Calculator()
         {
@@ -52,6 +52,46 @@ namespace JohansSimpleCalculator
             this.WindowState = WindowState.Minimized;
         }
 
+        private void UpdateDisplay()
+        {
+            string CalculationText = string.Empty;
+
+            foreach (object element in OpperationList)
+            {
+                if (element.GetType() == typeof(ValueItem))
+                {
+                    CalculationText += ((ValueItem)element).GetValueString();
+                }
+                else
+                {
+                    if (element.GetType() == typeof(ManipulationOperationType))
+                    {
+                        switch (((ManipulationOperationType)element)) {
+                            case ManipulationOperationType.Add:
+                                CalculationText += "+";
+                                break;
+                        }
+
+                    }
+                }
+            }
+
+            CalculationTxt.Text = CalculationText;
+
+            List<object> ReversedList = OpperationList.ToList();
+            ReversedList.Reverse();
+            foreach (object element in ReversedList)
+            {
+                if (element.GetType() == typeof(ValueItem))
+                {
+                    NumberTxt.Text = ((ValueItem)element).GetValueString();
+                    break;
+                }
+
+            }
+
+        }
+
         private void NumberButtonClick(object sender, RoutedEventArgs e)
         {
             string? ButtonValue = ((Button)sender).Tag as string;
@@ -74,37 +114,77 @@ namespace JohansSimpleCalculator
                     {
                         ((ValueItem)LastItem).AddDigit(ButtonValue[0]);
                     }
+                    else
+                    {
+                        LastItem = new ValueItem();
+                        OpperationList.Add(LastItem);
+
+                        ((ValueItem)LastItem).AddDigit(ButtonValue[0]);
+                    }
                 }
             }
 
             UpdateDisplay();
         }
 
-        private void UpdateDisplay()
+        private void OpperationButtonClick(object sender, RoutedEventArgs e)
         {
-            string CalculationText = string.Empty;
+            ShouldCalculateResult();
 
-            foreach (object element in OpperationList)
+            string? ButtonValue = ((Button)sender).Tag as string;
+
+            if (ButtonValue is not null)
             {
-                if (element.GetType() == typeof(ValueItem))
+                ManipulationOperationType? type = null;
+
+                switch (ButtonValue)
                 {
-                    CalculationText += ((ValueItem)element).GetValueString();
+                    case "+":
+                        type = ManipulationOperationType.Add;
+                        break;
+                    case "-":
+                        type = ManipulationOperationType.Subtract;
+                        break;
+                }
+
+                if (type is not null)
+                {
+                    OpperationList.Add(type);
                 }
             }
 
-            CalculationTxt.Text = CalculationText;
 
-            List<object> ReversedList = OpperationList.ToList();
-            ReversedList.Reverse();
-            foreach (object element in ReversedList)
+            UpdateDisplay();
+        }
+
+        private void ShouldCalculateResult()
+        {
+            if (OpperationList.Count == 3)
             {
-                if (element.GetType() == typeof(ValueItem))
+                if (OpperationList[0].GetType() == typeof(ValueItem))
                 {
-                    NumberTxt.Text = ((ValueItem)element).GetValueString();
-                    break;
+                    if (OpperationList[1].GetType() == typeof(ManipulationOperationType))
+                    {
+                        if (OpperationList[2].GetType() == typeof(ValueItem))
+                        {
+                            switch ((ManipulationOperationType)OpperationList[1])
+                            {
+                                case ManipulationOperationType.Add:
+                                    Add((ValueItem)OpperationList[0], (ValueItem)OpperationList[2]);
+                                    break;
+                            }
+                        }
+                    }
                 }
             }
-            
+        }
+
+        private void Add(ValueItem valueItem1, ValueItem valueItem2)
+        {
+            OpperationList.Clear();
+            ValueItem Result = new ValueItem();
+            Result.SetValue(valueItem1.GetValue() + valueItem2.GetValue());
+            OpperationList.Add(Result);
         }
     }
 }
