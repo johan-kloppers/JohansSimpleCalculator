@@ -294,5 +294,19 @@ namespace JohansSimpleCalculator
             ShouldCalculateResult();
             UpdateDisplay();
         }
+
+        private void ConvertToOppositeClick(object sender, RoutedEventArgs e)
+        {
+            if(OpperationList.Count > 0)
+            {
+                if (OpperationList[OpperationList.Count - 1].GetType() == typeof(ValueItem))
+                {
+                    decimal value = ((ValueItem)OpperationList[OpperationList.Count - 1]).GetValue();
+                    value = value * -1;
+                    ((ValueItem)OpperationList[OpperationList.Count - 1]).SetValue(value);
+                    UpdateDisplay();
+                }
+            }
+        }
     }
 }

@@ -144,8 +144,8 @@
                     <RowDefinition Height="0.8*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Name="CalculationTxt" Text="50 x 20" VerticalAlignment="Bottom" TextAlignment="Right" Foreground="{StaticResource Text.Faded.Foreground}" FontSize="{StaticResource Sum.Font.Size}"/>
-                <TextBlock Name="NumberTxt" Text="500.00" VerticalAlignment="Top" TextAlignment="Right" Grid.Row="1" FontWeight="DemiBold" Foreground="{StaticResource Text.Foreground}" FontSize="{StaticResource Result.Font.Size}"/>
+                <TextBlock Name="CalculationTxt" Text="" VerticalAlignment="Bottom" TextAlignment="Right" Foreground="{StaticResource Text.Faded.Foreground}" FontSize="{StaticResource Sum.Font.Size}"/>
+                <TextBlock Name="NumberTxt" Text="0" VerticalAlignment="Top" TextAlignment="Right" Grid.Row="1" FontWeight="DemiBold" Foreground="{StaticResource Text.Foreground}" FontSize="{StaticResource Result.Font.Size}"/>
             </Grid>
 
             <Grid Grid.Row="2" Margin="2">
@@ -183,7 +183,7 @@
                 <Button Grid.Row="3" Grid.Column="2" Content="3" Style="{DynamicResource ButtonNumberStyle}" Tag="3" Click="NumberButtonClick"/>
                 <Button Grid.Row="3" Grid.Column="3" Content="+" Style="{DynamicResource ButtonOtherStyle}" Tag="+" Click="OpperationButtonClick"/>
 
-                <Button Grid.Row="4" Grid.Column="0" Content="+/-" Style="{DynamicResource ButtonOtherStyle}"/>
+                <Button Grid.Row="4" Grid.Column="0" Content="+/-" Style="{DynamicResource ButtonOtherStyle}" Click="ConvertToOppositeClick"/>
                 <Button Grid.Row="4" Grid.Column="1" Content="0" Style="{DynamicResource ButtonNumberStyle}" Tag="0" Click="NumberButtonClick"/>
                 <Button Grid.Row="4" Grid.Column="2" Content="." Style="{DynamicResource ButtonOtherStyle}"/>
                 <Button Grid.Row="4" Grid.Column="3" Content="=" Style="{DynamicResource ButtonOtherStyle}" Tag="=" Click="OpperationButtonClick"/>
