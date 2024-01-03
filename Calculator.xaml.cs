@@ -77,6 +77,9 @@ namespace JohansSimpleCalculator
                             case ManipulationOperationType.Multiply:
                                 CalculationText += "×";
                                 break;
+                            case ManipulationOperationType.Divide:
+                                CalculationText += "÷";
+                                break;
                         }
 
                     }
@@ -161,6 +164,9 @@ namespace JohansSimpleCalculator
                         break;
                     case "×":
                         type = ManipulationOperationType.Multiply;
+                        break;                    
+                    case "÷":
+                        type = ManipulationOperationType.Divide;
                         break;
                     case "÷":
                         type = ManipulationOperationType.Divide;
@@ -245,6 +251,8 @@ namespace JohansSimpleCalculator
             else
             {
                 Result.SetValue(valueItem1.GetValue() / valueItem2.GetValue());
+
+
             }
             OpperationList.Add(Result);
         }
