@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace JohansSimpleCalculator
 {
@@ -94,15 +95,18 @@ namespace JohansSimpleCalculator
             }
             else
             {
-
                 List<object> ReversedList = OpperationList.ToList();
                 ReversedList.Reverse();
-                foreach (object element in ReversedList)
+
+                if (ReversedList.Count > 0)
                 {
-                    if (element.GetType() == typeof(ValueItem))
+                    if (ReversedList[0].GetType() == typeof(ValueItem))
                     {
-                        NumberTxt.Text = ((ValueItem)element).GetValueString();
-                        break;
+                        NumberTxt.Text = ((ValueItem)ReversedList[0]).GetValueString();
+                    }
+                    else
+                    {
+                        NumberTxt.Text = "0"; ;
                     }
                 }
             }
@@ -165,9 +169,6 @@ namespace JohansSimpleCalculator
                     case "×":
                         type = ManipulationOperationType.Multiply;
                         break;                    
-                    case "÷":
-                        type = ManipulationOperationType.Divide;
-                        break;
                     case "÷":
                         type = ManipulationOperationType.Divide;
                         break;
@@ -284,6 +285,13 @@ namespace JohansSimpleCalculator
         private void ClearAllClick(object sender, RoutedEventArgs e)
         {
             OpperationList.Clear();
+            UpdateDisplay();
+        }
+
+        private void ClearCurrentValueClick(object sender, RoutedEventArgs e)
+        {
+            OpperationList.RemoveAt(OpperationList.Count - 1);
+            ShouldCalculateResult();
             UpdateDisplay();
         }
     }
