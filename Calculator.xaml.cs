@@ -76,6 +76,9 @@ namespace JohansSimpleCalculator
                             case ManipulationOperationType.Multiply:
                                 CalculationText += "×";
                                 break;
+                            case ManipulationOperationType.Divide:
+                                CalculationText += "÷";
+                                break;
                         }
 
                     }
@@ -153,6 +156,9 @@ namespace JohansSimpleCalculator
                         break;
                     case "×":
                         type = ManipulationOperationType.Multiply;
+                        break;                    
+                    case "÷":
+                        type = ManipulationOperationType.Divide;
                         break;
                     case "=":
                         type = ManipulationOperationType.Equals;
@@ -212,11 +218,30 @@ namespace JohansSimpleCalculator
                                 case ManipulationOperationType.Multiply:
                                     Multiply((ValueItem)OpperationList[0], (ValueItem)OpperationList[2]);
                                     break;
+                                case ManipulationOperationType.Divide:
+                                    Divide((ValueItem)OpperationList[0], (ValueItem)OpperationList[2]);
+                                    break;
                             }
                         }
                     }
                 }
             }
+        }
+
+        private void Divide(ValueItem valueItem1, ValueItem valueItem2)
+        {
+            OpperationList.Clear();
+            ValueItem Result = new ValueItem();
+
+            if (valueItem1.GetValue() == 0 || valueItem2.GetValue() == 0)
+            {
+                Result.SetValue(0);
+            }
+            else
+            { 
+                Result.SetValue(valueItem1.GetValue() / valueItem2.GetValue()); 
+            }
+            OpperationList.Add(Result);
         }
 
         private void Multiply(ValueItem valueItem1, ValueItem valueItem2)
