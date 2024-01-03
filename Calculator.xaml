@@ -164,7 +164,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Row="0" Grid.Column="0" Content="C" Style="{DynamicResource ButtonOtherStyle}"/>
-                <Button Grid.Row="0" Grid.Column="1" Content="CE" Style="{DynamicResource ButtonOtherStyle}"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="CE" Style="{DynamicResource ButtonOtherStyle}" Click="ClearAllClick"/>
                 <Button Grid.Row="0" Grid.Column="2" Content="%" Style="{DynamicResource ButtonOtherStyle}"/>
                 <Button Grid.Row="0" Grid.Column="3" Content="÷" Style="{DynamicResource ButtonOtherStyle}" Tag="÷" Click="OpperationButtonClick"/>
 
