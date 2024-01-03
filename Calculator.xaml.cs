@@ -66,7 +66,8 @@ namespace JohansSimpleCalculator
                 {
                     if (element.GetType() == typeof(ManipulationOperationType))
                     {
-                        switch (((ManipulationOperationType)element)) {
+                        switch (((ManipulationOperationType)element))
+                        {
                             case ManipulationOperationType.Add:
                                 CalculationText += "+";
                                 break;
@@ -84,16 +85,23 @@ namespace JohansSimpleCalculator
 
             CalculationTxt.Text = CalculationText;
 
-            List<object> ReversedList = OpperationList.ToList();
-            ReversedList.Reverse();
-            foreach (object element in ReversedList)
+            if (OpperationList.Count == 0)
             {
-                if (element.GetType() == typeof(ValueItem))
-                {
-                    NumberTxt.Text = ((ValueItem)element).GetValueString();
-                    break;
-                }
+                NumberTxt.Text = "0";
+            }
+            else
+            {
 
+                List<object> ReversedList = OpperationList.ToList();
+                ReversedList.Reverse();
+                foreach (object element in ReversedList)
+                {
+                    if (element.GetType() == typeof(ValueItem))
+                    {
+                        NumberTxt.Text = ((ValueItem)element).GetValueString();
+                        break;
+                    }
+                }
             }
 
         }
@@ -154,6 +162,9 @@ namespace JohansSimpleCalculator
                     case "×":
                         type = ManipulationOperationType.Multiply;
                         break;
+                    case "÷":
+                        type = ManipulationOperationType.Divide;
+                        break;
                     case "=":
                         type = ManipulationOperationType.Equals;
                         break;
@@ -173,7 +184,7 @@ namespace JohansSimpleCalculator
                     }
                 }
 
-                
+
                 if (type is not null)
                 {
                     if (type != ManipulationOperationType.Equals)
@@ -212,11 +223,30 @@ namespace JohansSimpleCalculator
                                 case ManipulationOperationType.Multiply:
                                     Multiply((ValueItem)OpperationList[0], (ValueItem)OpperationList[2]);
                                     break;
+                                case ManipulationOperationType.Divide:
+                                    Divide((ValueItem)OpperationList[0], (ValueItem)OpperationList[2]);
+                                    break;
                             }
                         }
                     }
                 }
             }
+        }
+
+        private void Divide(ValueItem valueItem1, ValueItem valueItem2)
+        {
+            OpperationList.Clear();
+            ValueItem Result = new ValueItem();
+
+            if (valueItem1.GetValue() == 0 || valueItem2.GetValue() == 0)
+            {
+                Result.SetValue(0);
+            }
+            else
+            {
+                Result.SetValue(valueItem1.GetValue() / valueItem2.GetValue());
+            }
+            OpperationList.Add(Result);
         }
 
         private void Multiply(ValueItem valueItem1, ValueItem valueItem2)
@@ -241,6 +271,12 @@ namespace JohansSimpleCalculator
             ValueItem Result = new ValueItem();
             Result.SetValue(valueItem1.GetValue() + valueItem2.GetValue());
             OpperationList.Add(Result);
+        }
+
+        private void ClearAllClick(object sender, RoutedEventArgs e)
+        {
+            OpperationList.Clear();
+            UpdateDisplay();
         }
     }
 }
