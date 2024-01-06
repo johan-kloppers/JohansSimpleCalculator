@@ -308,5 +308,32 @@ namespace JohansSimpleCalculator
                 }
             }
         }
+
+        private void PeriodClick(object sender, RoutedEventArgs e)
+        {
+            if (OpperationList.Count > 0)
+            {
+                if (OpperationList[OpperationList.Count - 1].GetType() == typeof(ValueItem))
+                {
+                    ((ValueItem)OpperationList[OpperationList.Count - 1]).SetPeriod();
+                }
+                else
+                {
+                    ValueItem NewItem = new ValueItem();
+                    OpperationList.Add(NewItem);
+                    NewItem.AddDigit('0');
+                    NewItem.SetPeriod();
+                }
+            }
+            else
+            {
+                ValueItem NewItem = new ValueItem();
+                OpperationList.Add(NewItem);
+                NewItem.AddDigit('0');
+                NewItem.SetPeriod();
+            }
+
+            UpdateDisplay();
+        }
     }
 }
