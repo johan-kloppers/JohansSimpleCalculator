@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,10 @@ namespace JohansSimpleCalculator.Models
     internal class ValueItem
     {
         decimal _Value = 0;
+        bool PerriodChecked = false;
         public void AddDigit(char value)
         {
-            if (_Value == 0)
+            if (_Value == 0 && PerriodChecked == false)
             {
                 bool result = Int32.TryParse(value.ToString(), out int NumberValue);
 
@@ -21,10 +23,14 @@ namespace JohansSimpleCalculator.Models
                 }
             }
             else
-            { 
-                string StringNumber = _Value.ToString() + value;
+            {
+                string StringNumber = _Value.ToString(CultureInfo.InvariantCulture);
 
-                bool result = Decimal.TryParse(StringNumber, out decimal NumberValue);
+                StringNumber = InsertPeriodIfNeeded(StringNumber);
+
+                StringNumber = StringNumber + value;
+
+                bool result = Decimal.TryParse(StringNumber, CultureInfo.InvariantCulture, out decimal NumberValue);
 
                 if (result is not false)
                 {
@@ -33,14 +39,88 @@ namespace JohansSimpleCalculator.Models
             }
         }
 
+        private string InsertPeriodIfNeeded(string StringNumber)
+        {
+            if (PerriodChecked == true)
+            {
+                if (StringNumber.Contains('.') == false)
+                {
+                    StringNumber = StringNumber + '.';
+                }
+            }
+            return StringNumber;
+        }
+
+        private string RemoveTrailingZero(string StringNumber)
+        {
+            if (StringNumber.Contains('.') == true)
+            {
+                string newString = "";
+
+                var reverseString = StringNumber.Reverse();
+                bool Non0Found = false;
+
+                foreach (char c in reverseString)
+                {
+                    if (Non0Found == false)
+                    {
+                        if (c != '0')
+                        {
+                            Non0Found = true;
+                            if (c != '.')
+                            {
+                                newString += c;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        newString += c;
+                    }
+                }
+
+                var CorrectOrientation = newString.Reverse();
+
+                StringNumber = new string(CorrectOrientation.ToArray());
+
+            }
+
+            return StringNumber;
+        }
+
+        public void SetPeriod()
+        {
+            PerriodChecked = true;
+        }
+
         public void SetValue(decimal value)
         {
-            _Value = value;
+            string StringNumber = value.ToString(CultureInfo.InvariantCulture);
+
+            StringNumber = RemoveTrailingZero(StringNumber);
+
+            if (StringNumber.Contains('.') == true)
+            {
+                PerriodChecked = true;
+            }
+            else
+            {
+                PerriodChecked = false;
+            }
+
+            bool result = Decimal.TryParse(StringNumber, CultureInfo.InvariantCulture, out decimal NumberValue);
+
+            if (result is not false)
+            {
+                _Value = NumberValue;
+            }
         }
 
         public string GetValueString()
-        { 
-            return _Value.ToString();
+        {
+            return InsertPeriodIfNeeded(
+                    _Value.ToString(CultureInfo.InvariantCulture)
+                );
         }
 
         public decimal GetValue()
